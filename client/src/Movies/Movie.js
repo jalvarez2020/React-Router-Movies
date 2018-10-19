@@ -25,18 +25,24 @@ export default class Movie extends Component {
       });
   };
   // Un-comment this code when you're ready for the stretch problems
-  // componentWillReceiveProps(newProps){
-  //   if(this.props.match.params.id !== newProps.match.params.id){
-  //     this.fetchMovie(newProps.match.params.id);
-  //   }
-  // }
+  componentWillReceiveProps(newProps){
+    if(this.props.match.params.id !== newProps.match.params.id){
+      this.fetchMovie(newProps.match.params.id);
+    }
+  }
 
-  // saveMovie = () => {
-  //   const addToSavedList = this.props.addToSavedList;
-  //   addToSavedList(this.state.movie)
-  // }
+  saveMovie = (saveMovie) => {
+    const addToSavedList = this.props.addToSavedList;
+    addToSavedList(this.state.movie)
+  }
 
   render() {
+
+    const saveMovieHandler = (e) => {
+      e.preventDefault();
+    const saveMovie = this.state.movie;
+    return saveMovie(saveMovie); 
+  }
     
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
@@ -60,7 +66,7 @@ export default class Movie extends Component {
             </div>
           ))}
         </div>
-        <div className="save-button">Save</div>
+        <div onClick={saveMovieHandler} className="save-button">Save</div>
       </div>
     );
   }
